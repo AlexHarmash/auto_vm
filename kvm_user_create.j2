@@ -1,0 +1,19 @@
+#!bin/bash
+
+mkdir -p $HOME/kvm/vm{{NUM}}
+
+#<==============Created VM====================>
+
+qemu-img create -F qcow2 -b ~/kvm/base/focal-server-cloudimg-amd64.img \
+-f qcow2 ~/kvm/vm{{NUM}}/vm{{NUM}}.qcow2 {{DISK_SIZE}}G
+
+cloud-localds -v --network-config=data/network-config \
+~/kvm/vm{{NUM}}/vm{{NUM}}-seed.qcow2 data/user-data data/meta-data
+
+sudo virt-install --connect qemu:///system --virt-type kvm --name vm{{NUM}} --ram \
+{{RAM}} --vcpus={{VCPUS}} --os-type {{OS_TYPE}} --os-variant {{OS_VARIANT}} --disk \
+path=$HOME/kvm/vm{{NUM}}/vm{{NUM}}.qcow2,device=disk \
+--disk path=$HOME/kvm/vm{{NUM}}/vm{{NUM}}-seed.qcow2,device=disk \
+--import --network network=default,model=virtio,mac=52:54:00:{{MAC_ADDR}} --noautoconsole
+
+#<==============----------====================>

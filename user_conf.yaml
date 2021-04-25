@@ -1,0 +1,17 @@
+#network conf
+INTERFACE: eno1
+IP_GATWAY: 192.168.1.1
+
+#user conf
+RAM: 2048
+VCPUS: 2
+OS_VARIANT: ubuntu20.04
+OS_TYPE: linux
+DISK_SIZE: 10
+
+#parameters
+NUM: 2
+USER_NAME: vm2
+PASSWORD: vm2
+IP_ADDR: 192.168.8.12
+MAC_ADDR: 95:36:86

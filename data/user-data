@@ -1,0 +1,16 @@
+#cloud-config
+hostname: vm2
+manage_etc_hosts: true
+users:
+  - name: vm2
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/vm2
+    shell: /bin/bash
+    lock_passwd: false
+ssh_pwauth: true
+disable_root: false
+chpasswd:
+  list: |
+    vm2:vm2
+  expire: false
